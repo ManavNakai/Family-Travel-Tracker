@@ -41,11 +41,17 @@ async function checkUsers() {
 app.get("/", async (req, res) => {
   const countries = await checkVisisted();
   const currentUser = await checkUsers();
-  res.render("index.ejs", {
+  if (currentUser) res.render("index.ejs", {
     countries: countries,
     total: countries.length,
     users: users,
     colour: currentUser.colour,
+  });
+  else res.render("index.ejs", {
+    countries: countries,
+    total: countries.length,
+    users: users,
+    colour: "teal",
   });
 });
 
